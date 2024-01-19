@@ -13,9 +13,9 @@ datasource db {
 model Book {
   id          Int      @id @default(autoincrement())
   title       String   @db.VarChar(50)
-  author      String
+  author      Json     
   description String   @db.Text
-  image       String
+  image       String   @db.Text
   published   String
   pages       Int
   language    String

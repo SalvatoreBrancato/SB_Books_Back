@@ -1,12 +1,15 @@
 const {PrismaClient} = require('@prisma/client');
 const prisma = new PrismaClient();
 
+
+//###INDEX###
 async function index(req, res){
 
     const data = await prisma.book.findMany();
     return res.json(data)
 }
 
+//###CREATE###
 async function create(req,res){
 
     const datiInIngresso = req.body
@@ -26,7 +29,19 @@ async function create(req,res){
     return res.json(newBookRead)
 }
 
+//###DESTROY###
+async function destroy(req, res){
+    const id = req.params.id
+    await prisma.book.delete({
+        where:{
+            id: parseInt(id)
+        }
+    })
+    return res.json({message: 'Libro eliminato'})
+}
+
 module.exports = {
     index,
-    create
+    create,
+    destroy
 }
